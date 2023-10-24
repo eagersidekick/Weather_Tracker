@@ -1,0 +1,37 @@
+:root{
+    --dark: #0c1028;
+    --yellow: #EFCB68;
+    --light: #eef3f6;
+    --blue: #a8c7e0;
+    --orange: #F26419;
+}
+
+.navbar-brand {
+    font-family: 'Tilt Neon', sans-serif;
+    font-size: 30px;
+}
+
+body {
+    background-color: var(--light);
+}
+
+.forecast {
+    margin-top: 35px;
+}
+
+.card-header {
+    background-color: var(--dark);
+    color: white;
+    font-family: 'Tilt Neon', sans-serif;
+}
+
+.current-forecast .card-body {
+    background-color: var(--yellow);
+}
+
+.future-forecast .card-body {
+    background-color: var(--blue);
+}
+
+
+
