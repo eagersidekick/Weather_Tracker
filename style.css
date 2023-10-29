@@ -33,5 +33,9 @@ body {
     background-color: var(--blue);
 }
 
+.card {
+    width: 150px;
+}
+
 
 
