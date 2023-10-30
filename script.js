@@ -95,12 +95,12 @@ function renderWeatherData(weatherData) {
         var dateArray = data.dt_txt.split(' ');
         var iconCode = data.weather[0].icon;
         var iconUrl = "http://openweathermap.org/img/wn/" + iconCode + "@2x.png";
+        $(".location").text(weatherData.city.name);
         $(cards).show();
         if (index === 0 || dateArray[1] === "12:00:00") {
             var cardBody = $(cards[index]).children(".card-body");
             $(cards[index]).children(".date").text(dateArray[0]);
             $(cardBody).children(".weather-icon").children("img").attr("src", iconUrl);
-            // $(cardBody).children(".icon").text(iconUrl);
             $(cardBody).children(".temp").text("Temp: " + data.main.temp);
             $(cardBody).children(".wind").text("Wind: " + data.wind.speed);
             $(cardBody).children(".humidity").text("Humidity: " + data.main.humidity);

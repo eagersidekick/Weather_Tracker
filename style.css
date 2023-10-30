@@ -15,14 +15,11 @@ body {
     background-color: var(--light);
 }
 
-.forecast {
-    margin-top: 35px;
-}
-
 .card-header {
     background-color: var(--dark);
     color: white;
     font-family: 'Tilt Neon', sans-serif;
+    text-align: center;
 }
 
 .current-forecast .card-body {
@@ -36,6 +33,12 @@ body {
 .card {
     width: 150px;
     display: none;
+}
+
+.location {
+    font-family: 'Tilt Neon', sans-serif;
+    font-size: 35px;
+    margin: 35px;
 }
 
 
