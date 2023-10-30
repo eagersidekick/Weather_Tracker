@@ -1,19 +1,43 @@
 var key = "81189d0dccaaaefb081d0cc325011ad6";
 
+var storedCityNames = localStorage.getItem("storedCityNames");
+savedSearches();
 //event listener for the search bar
 $("#searchButton").click(function () {
     var cityName = $("#locationSearch").val().trim();
-    localStorage.setItem("cityname"), JSON.stringify(cityName);
     getWeatherData(cityName);
+
+    var test = 
+
+    if (storedCityNames === null) {
+        storedCityNames = cityName;
+    }
+    else if (storedCityNames.includes(cityName) === false) {
+        storedCityNames += "," + cityName;
+    }
+    localStorage.setItem("storedCityNames", storedCityNames);
+    savedSearches();
 });
 
-//function to save searches to local storage
+function savedSearches() {
+    if (storedCityNames === null) {
+        return;
+    }
+    storedCityNames.split(',').forEach((cityName) => {
+        var dropdownItem = document.createElement('a');
+        var dropdownMenu = document.getElementById("dropdown-menu");
+        dropdownItem.innerHTML = cityName;
+        dropdownItem.setAttribute("class", "dropdown-item");
+        dropdownMenu.appendChild(dropdownItem);
 
-//function to add saved searches to the dropdown
+    });
+}
+//clear local storage
+$("#clearResults").click(function () {
+    localStorage.clear();
+    location.reload();
+});
 
-//function to clear searches from local storage
-
-//function to fetch weather API and display results as cards
 
 function getWeatherData(cityName) {
     const apiUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${key}`;
@@ -51,9 +75,14 @@ function renderWeatherData(weatherData) {
 
     weatherData.list.forEach((data) => {
         var dateArray = data.dt_txt.split(' ');
+        var iconCode = data.weather[0].icon;
+        var iconUrl = "http://openweathermap.org/img/wn/" + iconCode + "@2x.png";
+
         if (index === 0 || dateArray[1] === "12:00:00") {
-            var cardBody= $(cards[index]).children(".card-body");
+            var cardBody = $(cards[index]).children(".card-body");
             $(cards[index]).children(".date").text(dateArray[0]);
+            $(cardBody).children(".weather-icon").children("img").attr("src", iconUrl);
+            // $(cardBody).children(".icon").text(iconUrl);
             $(cardBody).children(".temp").text("Temp: " + data.main.temp);
             $(cardBody).children(".wind").text("Wind: " + data.wind.speed);
             $(cardBody).children(".humidity").text("Humidity: " + data.main.humidity);
